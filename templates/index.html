@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Code Reviewer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="hero">
+
+        <div class="logo">
+            🤖
+        </div>
+
+        <h1>Smart Code Reviewer</h1>
+
+        <p>
+            AI Powered Code Analysis &
+            Optimization Platform
+        </p>
+
+    </header>
+
+    <!-- ================= WORKSPACE ================= -->
+
+    <div class="workspace">
+
+        <!-- ================= LEFT PANEL ================= -->
+
+        <section class="editor-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>💻 Source Code</h2>
+
+                    <span>
+
+                        Paste your code and let AI
+                        review it.
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <form action="/review"
+                  method="POST">
+
+                <div class="field">
+
+                    <label>
+
+                        Programming Language
+
+                    </label>
+
+                    <select name="language">
+
+                        <option value="Python"
+                        {% if language=="Python" %}selected{% endif %}>
+                            Python
+                        </option>
+
+                        <option value="Java"
+                        {% if language=="Java" %}selected{% endif %}>
+                            Java
+                        </option>
+
+                        <option value="C"
+                        {% if language=="C" %}selected{% endif %}>
+                            C
+                        </option>
+
+                        <option value="C++"
+                        {% if language=="C++" %}selected{% endif %}>
+                            C++
+                        </option>
+
+                        <option value="JavaScript"
+                        {% if language=="JavaScript" %}selected{% endif %}>
+                            JavaScript
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+
+                        Source Code
+
+                    </label>
+
+                    <textarea
+                        name="code"
+                        placeholder="Paste your code here..."
+                        required>{{ code if code else "" }}</textarea>
+
+                </div>
+
+                <button
+                    type="submit">
+
+                    🚀 Analyze Code
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- ================= RIGHT PANEL ================= -->
+
+        <section class="review-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+
+                        🤖 AI Review
+
+                    </h2>
+
+                    <span>
+
+                        AI Powered Analysis Report
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            {% if review %}
+
+            <div class="review-dashboard">
+
+                <!-- TOP ROW -->
+
+                <div class="summary-row">
+
+                    <!-- SCORE -->
+
+                    <div class="summary-card score-card">
+
+                        <span class="summary-label">
+
+                            Overall Score
+
+                        </span>
+
+                        <h1>
+
+                            {{ review.score }}/10
+
+                        </h1>
+
+                        <div class="progress">
+
+                            <div class="progress-fill"
+                                 style="width: {{ review.score*10 }}%;">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STATUS -->
+
+                    <div class="summary-card status-card">
+
+                        <span class="summary-label">
+
+                            Status
+
+                        </span>
+
+                        <div class="status">
+
+                            {{ review.status }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PROBLEMS -->
+
+                <div class="review-card">
+
+                    <div class="card-title">
+
+                        🐞 Problems Found
+
+                    </div>
+
+                    <div class="review-list">
+
+                        {% for problem in review.problems %}
+
+                        <div class="problem-item">
+
+                            ❌ {{ problem }}
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+                                <!-- SUGGESTIONS -->
+
+                <div class="review-card">
+
+                    <div class="card-title">
+
+                        💡 Suggestions
+
+                    </div>
+
+                    <div class="review-list">
+
+                        {% for suggestion in review.suggestions %}
+
+                        <div class="suggestion-item">
+
+                            💡 {{ suggestion }}
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                <!-- COMPLEXITY -->
+
+                <div class="complexity-row">
+
+                    <div class="summary-card complexity-card">
+
+                        <span class="summary-label">
+
+                            📈 Time Complexity
+
+                        </span>
+
+                        <h2>
+
+                            {{ review.time_complexity }}
+
+                        </h2>
+
+                    </div>
+
+                    <div class="summary-card complexity-card">
+
+                        <span class="summary-label">
+
+                            💾 Space Complexity
+
+                        </span>
+
+                        <h2>
+
+                            {{ review.space_complexity }}
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <!-- OPTIMIZED CODE -->
+
+                <div class="review-card">
+
+                    <div class="code-header">
+
+                        <div class="card-title">
+
+                            ⚡ Optimized Code
+
+                        </div>
+
+                        <button
+                            id="copyButton"
+                            type="button">
+
+                            📋 Copy
+
+                        </button>
+
+                    </div>
+
+<pre id="optimizedCode"><code>{{ review.optimized_code }}</code></pre>
+
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+
+                    🤖
+
+                </div>
+
+                <h2>
+
+                    AI Review Awaits
+
+                </h2>
+
+                <p>
+
+                    Paste your source code,
+
+                    choose the programming language,
+
+                    and click
+
+                    <strong>Analyze Code</strong>
+
+                    to receive an AI-powered review.
+
+                </p>
+
+            </div>
+
+            {% endif %}
+                    </section>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

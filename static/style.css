@@ -1,0 +1,330 @@
+/* ==========================
+   SMART CODE REVIEWER
+   Modern AI Dashboard Theme
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Segoe UI,Arial,sans-serif;
+
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+
+    min-height:100vh;
+
+    color:#ffffff;
+
+    padding:40px;
+
+}
+
+.page{
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.hero h1{
+
+    font-size:44px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+    color:#dbeafe;
+
+}
+
+.input-card{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:18px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+.field{
+
+    margin-bottom:22px;
+
+}
+
+label{
+
+    display:block;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+select,
+textarea{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:16px;
+
+    outline:none;
+
+    background:#ffffff;
+
+    color:#111827;
+
+}
+
+textarea{
+
+    min-height:320px;
+
+    resize:vertical;
+
+    font-family:Consolas,monospace;
+
+    line-height:1.6;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.35);
+
+}
+/* ===============================
+   AI REVIEW DASHBOARD
+================================== */
+
+.review-dashboard{
+    margin-top:25px;
+}
+
+.summary-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.summary-card{
+    background:#ffffff;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.summary-card:hover{
+    transform:translateY(-5px);
+}
+
+.summary-label{
+    font-size:15px;
+    color:#666;
+    display:block;
+    margin-bottom:12px;
+    font-weight:600;
+}
+
+.score-card h1{
+    font-size:48px;
+    color:#2563eb;
+    margin:0;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#e5e7eb;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:20px;
+}
+
+.progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#06b6d4);
+    border-radius:30px;
+}
+
+.status{
+    display:inline-block;
+    padding:12px 25px;
+    border-radius:30px;
+    background:#22c55e;
+    color:white;
+    font-weight:700;
+    font-size:18px;
+}
+
+.review-card{
+    background:#fff;
+    border-radius:15px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card-title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:20px;
+    color:#1f2937;
+}
+
+.review-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.problem-item{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:15px;
+    border-left:6px solid #ef4444;
+    border-radius:10px;
+}
+
+.suggestion-item{
+    background:#ecfeff;
+    color:#155e75;
+    padding:15px;
+    border-left:6px solid #06b6d4;
+    border-radius:10px;
+}
+
+.complexity-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.complexity-card{
+    text-align:center;
+}
+
+.complexity-card h2{
+    color:#2563eb;
+    font-size:32px;
+    margin-top:10px;
+}
+
+.code-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+#copyButton{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#copyButton:hover{
+    background:#1d4ed8;
+}
+
+#optimizedCode{
+    background:#111827;
+    color:#f9fafb;
+    padding:20px;
+    border-radius:12px;
+    overflow:auto;
+    max-height:450px;
+    font-size:15px;
+    line-height:1.6;
+}
+
+.empty-state{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.empty-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+@media(max-width:900px){
+
+.summary-row,
+.complexity-row{
+
+grid-template-columns:1fr;
+
+}
+
+}
